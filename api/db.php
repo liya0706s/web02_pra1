@@ -69,6 +69,14 @@ class DB
         }
     }
 
+    protected function math($math,$col,$array='',$other=''){
+        $sql="select $math($col) from $this->table";
+        $sql=$this->sql_all($sql,$array,$other);
+
+        // 因為這類方法大多是只會回傳一個值，所以使用fetchColumn()的方法來回傳
+        return $this->pdo->query($sql)->fetchColumn();
+    }
+
     // 此方法主要是用來取得符合條件的所有資料
     function all($where='', $other =''){
         // 建立一個基礎語法字串
@@ -77,5 +85,47 @@ class DB
         // 將語法字串及參數帶入到類別內部的sql_all()方法中，結果會得到一個完整的SQL句子
         $sql=$this->sql_all($sql,$where,$other);
 
+        // 將sql句子帶進pdo的query方法中，並以fetchAll的方式回傳所有的結果
+        return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    function find($id){
+        // 建立一個基礎語法字串
+        $sql="select * from $this->table";
+
+        // 如果 $id 是陣列
+        if(is_array($id)){
+
+            // 執行內部方法a2s
+            $tmp=$this->a2s($id);
+
+            // 拼接sql語句
+            $sql .= " where " .join(" && ", $tmp);
+        }
+        // 如果 $id 是數字
+        else if(is_numeric($id)){
+
+            // 拼接 sql語句
+            $sql .= " where `id`='$id'";
+        }
+
+        // 將sql句子帶進pdo的query方法中，並以fetch的方式回傳一筆資料結果
+        return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+    }
+
+    function del($id){
+        // 建立一個基礎與法字串
+        $sql="delete from $this->table";
+
+        if(is_array($id)){
+            $tmp=$this->a2s($id);
+            $sql .= " where ". join(" && ", $tmp);
+        }else if(is_numeric($id)){
+            $sql .= " where `id`='$id'";
+        }
+
+        // 將sql句子帶進pdo的exec方法中，回傳的結果是影響了幾筆資料
+        return $this->pdo->exec($sql);
+    }
+    
 }
