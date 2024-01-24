@@ -30,12 +30,28 @@
 				<a class="blo" href="?do=que">問卷調查</a>
 			</div>
 			<div class="hal" id="main">
+				
 				<div>
-
 					<span style="width:18%; display:inline-block;">
 						<a href="?do=login">會員登入</a>
 					</span>
 					<div class="">
+						<?php
+						// 取得網址參數
+						$do = $_GET['do'] ?? 'main';
+
+						// 建立頁面檔案所在路徑
+						$file = "./front/{$do}.php";
+
+						// 判斷檔案及變數
+						if (file_exists($file)) {
+							// 載入到對應的頁面檔案
+							include $file;
+						} else {
+							// 如果沒有對應的頁面檔案，則直接載入main.php 
+							include "./front/main.php";
+						}
+						?>
 					</div>
 				</div>
 			</div>
