@@ -3,7 +3,7 @@ date_default_timezone_set("Asia/Taipei");
 session_start();
 class DB
 {
-    protected $dsn = "mysql:host=localhost;charset=utf8;dbname=db09";
+    protected $dsn = "mysql:host=localhost;charset=utf8;dbname=db15";
     // db+抽到的崗位號碼
     // protected $dsn = "mysql:host=localhost;charset=utf8;dbname=bquiz"; //資料庫
     protected $pdo;
@@ -161,33 +161,34 @@ function to($url)
 }
 
 // 每一張資料表的物件變數
-$Title = new DB('titles');
 $Total = new DB('total');
-$Bottom = new DB('bottom');
-$Ad = new DB('ad');
-$Mvim = new DB('mvim');
-$Image = new DB('image');
+$User = new DB('user');
 $News = new DB('news');
-$Admin = new DB('admin');
-$Menu = new DB('menu');
+$Que = new DB('que');
+$Log = new DB('log');
 
 
-// 大寫DB帶入其他網頁變成全域變數
-if (isset($_GET['do'])) {
-    if (isset(${ucfirst($_GET['do'])})) {
-        $DB = ${ucfirst($_GET['do'])};
-        // 例如 $_GET['do']=news; ${ucfirst($_GET['do'])}會轉換成$News
-        // 賦值給 $DB
-    }
-} else {
-    // 沒有do=xx時會導入title首頁
-    $DB = $Title;
-}
 
-// 先檢查是否已經登入過了
+
+// 先檢查是否有拜訪
 // 自行定義命名session變數
+
+// 判斷今天的日期在不在
+// 用count直接判斷有一筆比較快，find還有無
 if (!isset($_SESSION['visited'])) {
-    $Total->q("update `total` set `total`=`total`+1 where `id`=1");
+    if ($Total->count(['date' => date('Y-m-d')]) > 0) {
+        $total = $Total->find(['date' => date('Y-m-d')]);
+        $total['total']++;
+        $Total->save($total);
+    } else {
+        // 有人來了，第一位訪客，把今天的日期加上去
+        $Total->save(['total' => 1, 'date' => date('Y-m-d')]);
+    }
     $_SESSION['visited'] = 1;
-    // 不可放0, session會是null
+    // $_SESSION紀錄這個瀏覽器，當前會話期間已經訪問過您的網站
+
+    // 測試另外的日期，把設定 自動設定時間關閉
+    // 變更日期和時間 瀏覽器要全部關閉，再重新開啟
+    // SESSION才有辦法測試另外的日期
 }
+?>

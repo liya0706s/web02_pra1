@@ -217,4 +217,27 @@ class DB
         // 執行 SQL 語句並回傳結果
         return $this->pdo->exec($sql);
     }
+
+    public function q($sql){
+        return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
 }
+
+// 此兩個函式會獨立在DB類別之外
+function to($url){
+    header("location:".$url);
+}
+
+function dd($array){
+    echo "<pre>";
+    print_r($array);
+    echo "</pre>";
+}
+
+// 建議使用首字母大寫來代表這是資料表的變數， 方便和拳小寫的變數做區隔
+$Total = new DB('total');
+$User=new DB('user');
+$News=new DB('news');
+$Que= new DB('que');
+$Log=new DB('log');
