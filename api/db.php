@@ -218,18 +218,20 @@ class DB
         return $this->pdo->exec($sql);
     }
 
-    public function q($sql){
+    public function q($sql)
+    {
         return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
-    
 }
 
 // 此兩個函式會獨立在DB類別之外
-function to($url){
-    header("location:".$url);
+function to($url)
+{
+    header("location:" . $url);
 }
 
-function dd($array){
+function dd($array)
+{
     echo "<pre>";
     print_r($array);
     echo "</pre>";
@@ -237,7 +239,27 @@ function dd($array){
 
 // 建議使用首字母大寫來代表這是資料表的變數， 方便和拳小寫的變數做區隔
 $Total = new DB('total');
-$User=new DB('user');
-$News=new DB('news');
-$Que= new DB('que');
-$Log=new DB('log');
+$User = new DB('user');
+$News = new DB('news');
+$Que = new DB('que');
+$Log = new DB('log');
+
+// 增加一個方法來判斷訪客的拜訪狀態，
+// 用來決定當日訪客人次是否需要增加。
+
+// 如果沒有被設置（即不存在或其值為 NULL） $_SESSION['visited'], 則執行以下程式碼
+if (!isset($_SESSION['visited'])) {
+    // 如果今天的日期在資料庫中已存在，則取得該筆資料
+    if ($Total->count(['date' => date('Y-m-d')]) > 0) {
+        $total = $Total->find(['date' => date('Y-m-d')]);
+        // 將該筆資料的 total 欄位加一
+        $total['total']++;
+        // 儲存更新後的資料
+        $Total->save($total);
+    }else{
+        // 如果今天的日期在資料庫中不存在，則新增一筆資料
+        $Total->save(['total'=>1,'date'=>date('Y-m-d')]);
+    }
+    // 設定 $_SESSION['visited'] 為 1, 表示已經訪問過了
+    $_SESSION['visited']=1;
+}
