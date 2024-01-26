@@ -1,4 +1,4 @@
-﻿<?php include_once "db.php"; ?>
+﻿<?php include_once "./api/db.php"; ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0039) -->
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -18,9 +18,10 @@
 	</div>
 	<div id="all">
 		<div id="title">
-			00 月 00 號 Tuesday | 今日瀏覽: 1 | 累積瀏覽: 36 </div>
+			<?=date("m 月 d 日 l");?> | 今日瀏覽: 1 | 累積瀏覽: 36 </div>
+			<a href="index.php" style="float:right">回首頁</a>
 		<div id="title2">
-
+<a href="index.php"><img src="./icon/02B01.jpg" title="健康促進往-回首頁"></a>
 		</div>
 		<div id="mm">
 			<div class="hal" id="lef">
