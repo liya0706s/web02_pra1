@@ -1,3 +1,39 @@
+<style>
+    /* 使用flex屬性來讓容器中的tags併成一個橫列 */
+    .tags {
+        display: flex;
+        margin-left: 1px;
+    }
+
+    /* 設定每個標籤的外型和排列
+利用margin:-1px讓標籤和檢籤的邊線合成一條 */
+    .tag {
+        width: 100px;
+        padding: 5px 10px;
+        border: 1px black solid;
+        border-radius: 5px 5px 0 0;
+        text-align: center;
+        background-color: #ccc;
+        cursor: pointer;
+    }
+
+    /* 設定文章區塊的外型 */
+    article section {
+        border: 1px solid black;
+        border-radius: 0 5px 5px 5px;
+        min-height: 480px;
+        margin-top: -1px;
+        display: none;
+        padding: 15px;
+    }
+
+    /* 設定啟用中的標籤的css樣式 */
+    .active {
+        border-bottom: 1px solid black;
+        background-color: white;
+    }
+</style>
+
 <div class="tags">
     <div id="sec01" class="tag active">健康新知</div>
     <div id="sec02" class="tag">菸害防治</div>
@@ -8,9 +44,9 @@
 <article>
     <!-- 每篇文章都會加上sectionXX的id編號 -->
     <section id="section01" style="display:block">
-    <h2>健康新知</h2>
-<!-- 加上pre標籤可以讓文章內容維持原本格式 -->
-<pre>
+        <h2>健康新知</h2>
+        <!-- 加上pre標籤可以讓文章內容維持原本格式 -->
+        <pre>
 缺乏運動已成為影響全球死亡率的第四大危險因子-國人無規律運動之比率高達72.2%
 資料來源： 行政院衛生署國民健康局 
 發佈日期： 2012 / 10 / 07
@@ -102,3 +138,28 @@
         </pre>
     </section>
 </article>
+
+<script>
+    // 建立頁籤的點擊事件
+    $(".tag").on('click', function() {
+
+        // 先移除全部頁籤的active class
+        $(".tag").removeClass('active')
+
+        // 在點擊當下的頁籤加上acitve
+        $(this).addClass('active')
+
+        // 透過字串取代的方式取得對應的section id 
+        let id = $(this).attr('id').replace("sec", 'section')
+        // 從當前被點擊元素的 ID 屬性獲取值，並將其中的 "sec" 字符串替換成 "section"
+        // 例如 "sec01" 會被替換成 "section01"
+
+        // 先隱藏全部的文章，所有 <section> 元素
+        $("section").hide();
+
+        // 再顯示對應的文章
+        $("#" + id).show();
+        // 顯示 ID 與 "當前被點擊"元素匹配的 <section> 元素 
+        // 例如點擊 id為 sec01 會顯示 #section01.show()
+    })
+</script>
