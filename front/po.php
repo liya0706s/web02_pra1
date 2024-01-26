@@ -49,7 +49,7 @@
     // 註冊 .type-item 的點擊事件
     $(".type-item").on('click', function() {
         // 取出點擊的文字並放入導航列中
-        $('.type').text($(this).text())
+        $(".type").text($(this).text())
 
         // data-*屬性值，存放在變數中
         // 點擊同時取得分類項目的代號
@@ -72,7 +72,7 @@
         })
 
         function getNews(id){
-            $.get("./api/get_news",{id},(news)=>{
+            $.get("./api/get_news.php",{id},(news)=>{
                 $(".article").show()  // 文章出現
                 $(".list-items").hide()  // 
             })
