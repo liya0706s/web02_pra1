@@ -4,7 +4,7 @@
     <table>
         <tr>
             <td class="clo">Step1:登入帳號</td>
-            <td><input type="text" name="" id=""></td>
+            <td><input type="text" name="acc" id="acc"></td>
         </tr>
         <tr>
             <td class="clo">Step2:登入密碼</td>
@@ -16,7 +16,7 @@
         </tr>
         <tr>
             <td class="clo">Step4:信箱(忘記密碼時使用)</td>
-            <td><input type="text" name="" id=""></td>
+            <td><input type="text" name="email" id="email"></td>
         </tr>
         <tr>
             <td>
