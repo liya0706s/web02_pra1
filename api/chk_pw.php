@@ -1,5 +1,5 @@
 <?php
-include_once "./api/chk_pw.php";
+include_once "./db.php";
 
 // 使用count來進行帳號與密碼的檢查
 $res=$User->count($_POST);

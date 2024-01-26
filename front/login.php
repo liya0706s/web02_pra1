@@ -3,7 +3,7 @@
     <table>
         <tr>
             <td class='clo'>帳號</td>
-            <td><input type="text" name="pw" id="acc"></td>
+            <td><input type="text" name="acc" id="acc"></td>
         </tr>
         <tr>
             <td class='clo'>密碼</td>
@@ -23,29 +23,31 @@
 </fieldset>
 
 <script>
-    function login(){
+    function login() {
         // 取得帳號輸入框的值
-        let acc=$('#acc').val()
+        let acc = $('#acc').val()
         // 取得密碼輸入框的值
-        let pw=$('#pw').val()
+        let pw = $('#pw').val()
         // 發送 POST 請求到chk_acc.php 檢查帳號是否存在
-        $.post('./api/chk_acc.php',{acc},(res)=>{
+        $.post('./api/chk_acc.php', {
+            acc
+        }, (res) => {
             // 如果回傳值的結果為0, 表示查無帳號
-            if (parseInt(res)==0){
+            if (parseInt(res) == 0) {
                 alert("查無帳號");
-            }else{
+            } else {
                 // 發送 POST 請求到 chk_pw.php 檢查帳號密碼是否正確
-                $.post('./api/chk_pw.php', {acc,pw},(res)=>{
+                $.post('./api/chk_pw.php', {acc,pw}, (res) => {
                     // 如果回傳值的結果為1, 表示密碼正確
-                    if(parseInt(res)==1){
+                    if (parseInt(res) == 1) {
                         // 如果帳號為'admin'，導向後台頁面
-                        if($('#acc').val()=='admin'){
-                            location.href='back.php'
-                        }else{
+                        if ($("#acc").val() == 'admin') {
+                            location.href = "back.php"
+                        } else {
                             // 否則導向首頁
-                            location.href='index.php'
+                            location.href = "index.php"
                         }
-                    }else{
+                    } else {
                         alert("密碼錯誤")
                     }
                 })
@@ -53,7 +55,7 @@
         })
     }
 
-    function clean(){
+    function clean() {
         // 清除帳號密碼欄位的值
         $("input[type='text'],input[type='password']").val("");
     }
