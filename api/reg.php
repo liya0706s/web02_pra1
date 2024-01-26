@@ -1,5 +1,5 @@
 <?php
-include_once "./api/db.php";
+include_once "./db.php";
 
 // 刪除資料表中沒有的pw2欄位
 unset($_POST['pw2']);
