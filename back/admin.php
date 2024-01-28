@@ -1,7 +1,7 @@
 <fieldset>
     <legend>帳號管理</legend>
     <form action="./api/edit_user.php" method="post">
-        <table style="width:55%;margin-auto;text-align:center">
+        <table style="width:55%;margin:auto;text-align:center">
             <tr>
                 <td class="clo">帳號</td>
                 <td class="clo">密碼</td>
@@ -13,19 +13,19 @@
             // 用迴圈把 $rows 一個個帶入 $row
             foreach ($rows as $row) {
                 // 判斷將每個帳號列出來，除了管理者 'adimn' 帳號密碼 
-                if ($row['acc'] != 'admin'){
+                if ($row['acc'] != 'admin') {
             ?>
-                <tr>
-                    <td><?= $row['acc']; ?></td>
-                    <!-- 取得$row['pw']的多字節字串長度，然後生成一個相同數量的星號組成的字符串 -->
-                    <td><?= str_repeat("*", mb_strlen($row['pw'])); ?></td>
-                    <td>
-                        <input type="checkbox" name="del[]" id="<?= $row['id']; ?>">
-                    </td>
-                </tr>
+                    <tr>
+                        <td><?= $row['acc']; ?></td>
+                        <!-- 取得$row['pw']的多字節字串長度，然後生成一個相同數量的星號組成的字符串 -->
+                        <td><?= str_repeat("*", mb_strlen($row['pw'])); ?></td>
+                        <td>
+                            <input type="checkbox" name="del[]" value="<?= $row['id']; ?>">
+                        </td>
+                    </tr>
             <?php
+                }
             }
-        }
             ?>
         </table>
         <div class="ct">
