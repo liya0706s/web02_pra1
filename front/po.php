@@ -45,7 +45,7 @@
     // 建立分類項目點擊置換上方導引文字功能
 
     // init func 
-    getList(1);
+    getList(1)
     // 註冊 .type-item 的點擊事件
     $(".type-item").on('click', function() {
         // 取出點擊的文字並放入導航列中
@@ -65,18 +65,25 @@
     // 定義getList函式
     function getList(type) {
         // 使用jQuery的get方法發送HTTP GET請求到"./api/get_list.php"，傳遞type參數
-        $.get("./api/get_list.php", {type}, (list) => { // 拿到list
+        $.get("./api/get_list.php", {
+            type
+        }, (list) => { // 返回的數據被存儲在名為list的變量中
             $(".list-items").html(list)
-            $(".article").hide()
-            $(".list-items").show()
+            // 總結來說，$(".list-items").html(list)這段代碼的作用，
+            // 是將具有class="list-items"的元素內的HTML內容更新為list變量中的HTML內容。
+            $(".article").hide();
+            $(".list-items").show();
         })
+    }
 
-        function getNews(id){
-            $.get("./api/get_news.php",{id},(news)=>{
-                $(".article").show()  // 文章出現
-                $(".list-items").hide()  // 
-            })
-        }
-        
+    function getNews(id) {
+        $.get("./api/get_news.php", {
+            id
+        }, (news) => {
+            $(".article").html(news)
+            $(".article").show(); 
+            // 文章出現
+            $(".list-items").hide(); 
+        })
     }
 </script>
