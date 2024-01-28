@@ -90,7 +90,8 @@
                     } else {
                         // 發送 POST 請求進行註冊
                         $.post("../api/reg.php", user, (res) => {
-                            alert("註冊完成，歡迎加入")
+                            // 註冊完成時直接重整頁面，不用跳出註冊成功通知
+                            location.reload()
                         })
                     }
                 })
