@@ -10,7 +10,7 @@
             <?php
             // user表單中的所有資料撈出來，放到$rows變數裡
             $rows = $User->all();
-            // 用迴圈把 $rows 一個個帶入 $row
+            // 用迴圈把 $rows 一個個用 $row 列出
             foreach ($rows as $row) {
                 // 判斷將每個帳號列出來，除了管理者 'adimn' 帳號密碼 
                 if ($row['acc'] != 'admin') {
