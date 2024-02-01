@@ -15,9 +15,15 @@ if(isset($_POST['id'])){
             $New->del($id);
         }else{
             // 取得指定id的新聞資料
-            $news=$News->find($id)
+            $news=$News->find($id);
+            // 檢查是否有設定 $_POST['sh'] 且 $id 在 $_POST['sh'] 陣列中
+            // 否則則是將 $news['sh']設為1，否則設為0
+            $news['sh']=(isset($_POST['sh']) && in_array($id,$_POST['sh']))?1:0;
+            // 呼叫 News 物件的 save() 方法儲存新聞資料
+            $News->save($news);
         }
     }
 }
+to("../back.php?do=news");
 
 ?>
