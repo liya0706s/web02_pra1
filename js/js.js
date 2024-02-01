@@ -4,7 +4,7 @@ function lo(th, url) {
 }
 
 function good(news) {
-	$.post("./api/good.php", {
+	$.post("../api/good.php", {
 		news
 	}, () => {
 		// 使用重整頁面的方式來更新按讚的結果
