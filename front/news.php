@@ -17,7 +17,7 @@
 
         // 撈資料限制從開始頁取5筆
         // 更改排序的方式，只要更改取資料的sql語法即可
-        $rows = $News->all(['sh' => 1], " order by `goods` desc limit $start,$div");
+        $rows = $News->all(['sh' => 1], " order by `good` desc limit $start,$div");
         foreach ($rows as $row) {
         ?>
             <tr>
@@ -39,12 +39,12 @@
                 <!-- 根據登入狀態來顯示讚的程式 -->
                 <td>
                     <?php
-                    // 1.判斷有沒有登入
+                    // 1.判斷有沒有登入，有登入才可以按讚
                     if (isset($_SESSION['user'])) {
                         // 2.判斷有沒有按過讚
                         // 傳遞給count方法的條件參數。這個參數是一個關聯陣列，代表著要搜尋的條件
                         // count($where='',$other='')
-                        if ($Log->count(['news' => $row['id'], 'user' => $_SESSION['user']]) > 0) {
+                        if ($Log->count(['news' => $row['id'], 'acc' => $_SESSION['user']]) > 0) {
                             // 如果大於0，表示在資料庫中找到了符合這些條件的記錄，已經按過讚
                             echo "<a href='Javascript:good({$row['id']})'>收回讚</a>";
                         } else {
