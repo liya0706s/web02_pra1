@@ -16,7 +16,8 @@
         $start = ($now - 1) * $div;
 
         // 撈資料限制從開始頁取5筆
-        $rows = $News->all(['sh' => 1], " limit $start,$div");
+        // 更改排序的方式，只要更改取資料的sql語法即可
+        $rows = $News->all(['sh' => 1], " order by `goods` desc limit $start,$div");
         foreach ($rows as $row) {
         ?>
             <tr>
