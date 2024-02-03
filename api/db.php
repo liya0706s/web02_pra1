@@ -237,7 +237,7 @@ function dd($array)
     echo "</pre>";
 }
 
-// 建議使用首字母大寫來代表這是資料表的變數， 方便和拳小寫的變數做區隔
+// 建議使用首字母大寫來代表這是資料表的變數， 方便和全小寫的變數做區隔
 $Total = new DB('total');
 $User = new DB('user');
 $News = new DB('news');
