@@ -1,0 +1,29 @@
+<?php
+// 前台問卷投票功能
+// 根據網址參數傳遞id取得主題資料
+$que = $Que->find($_GET['id'])
+
+?>
+<fieldset>
+    <!-- text是標題  -->
+    <legend>目前位置:首頁 > 問卷調查 <?= $que['text']; ?></legend>
+    <!-- 標題用h3標籤 -->
+    <h3><?= $que['text']; ?></h3>
+
+    <form action="./api/vote.php" method="post">
+        <?php
+        // 根據主題的id取得所有的選項 
+        $opts = $Que->all(['subject_id' => $_GET['id']]);
+        foreach ($opts as $opt) {
+            echo "<div>";
+            // 單選按鈕，名稱是opt 
+            echo "<input type='radio' name='opt' value='{$opt['id']}'>";
+            echo $opt['text'];
+            echo "</div>";
+        }
+        ?>
+        <div class="ct">
+            <input type="submit" value="我要投票">
+        </div>
+    </form>
+</fieldset>

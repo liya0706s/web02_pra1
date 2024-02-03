@@ -10,7 +10,7 @@ $que = $Que->find($_GET['id'])
     <!-- 標題用h3標籤 -->
     <h3><?= $que['text']; ?></h3>
     <?php
-    // 找出所有(選項)subject_id的值等於GET id的值(主題id)
+        //根據主題的id取得所有的選項
     $opts = $Que->all(['subject_id' => $_GET['id']]);
     foreach ($opts as $opt) {
         // 判斷總投票數是否為0，避免發生分母為0的錯誤
