@@ -29,10 +29,7 @@ a:hover
 {
 	text-decoration:underline;
 }
-#mm
-{
-	min-height:570px;
-}
+
 #all
 {
 	padding: 2px;
@@ -56,7 +53,9 @@ a:hover
 	padding:2px;
 	background:url(../icon/02B04.png) repeat-y;
 	/*background-size:100% auto;*/
-	min-height:568px;
+	/* min-height:568px; */
+	/* 高度修改成比例 */
+	height:100%;
 	display:inline-block;
 	vertical-align:top;
 	position:relative;
@@ -64,13 +63,17 @@ a:hover
 }
 #mm
 {
-	padding-top:3px;
+	/* padding-top:3px; */
+	height: 520px;
+	/* 修改成固定高度 */
 }
 #main
 {
 	display:inline-block;
 	width:78%;
-	height:565px;
+	/* height:565px; */
+	height:100%;
+	/* 高度修改成比例 */
 	padding:4px;
 	border:solid 1px #000000;
 	overflow:auto;
