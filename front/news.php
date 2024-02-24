@@ -42,8 +42,7 @@
                     // 1.判斷有沒有登入，有登入才可以按讚
                     if (isset($_SESSION['user'])) {
                         // 2.判斷有沒有按過讚
-                        // 傳遞給count方法的條件參數。這個參數是一個關聯陣列，代表著要搜尋的條件
-                        // count($where='',$other='')
+                        // 按讚紀錄表, 用id鎖定該文章, 帳號是登入者的session，代表有按讚
                         if ($Log->count(['news' => $row['id'], 'acc' => $_SESSION['user']]) > 0) {
                             // 如果大於0，表示在資料庫中找到了符合這些條件的記錄，已經按過讚
                             echo "<a href='Javascript:good({$row['id']})'>收回讚</a>";
@@ -84,7 +83,7 @@
     // 對class title 進行點擊事件註冊
     $('.title').on('click', (e) => {
         // e.target是被點擊的DOM元素，$(e.target)將其轉換為jQuery對象
-        // 取得點擊的id，獲取被點擊元素的data-id屬性值
+        // 取得點擊的id，獲取被點擊元素的data-id屬性的值
         // 這個值通常用於識別哪一條新聞被點擊
         let id = $(e.target).data('id');
 
