@@ -1,5 +1,5 @@
 <?php
-include_once "./db.php";
+include_once "db.php";
 
 // 根據郵件來取得使用者資料
 $user=$User->find(['email'=>$_POST['email']]);
