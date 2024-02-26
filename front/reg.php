@@ -45,7 +45,7 @@
         if (user.acc != '' && user.pw != '' && user.pw2 != '' && user.email != '') {
             // 檢查密碼和確認密碼是否相符
             if (user.pw == user.pw2) {
-                // 發送 POST 請求檢查密碼是否重覆
+                // 發送 POST 請求檢查帳號是否重覆
                 $.post("./api/chk_acc.php", {
                     acc: user.acc
                 }, (res) => {
@@ -54,7 +54,7 @@
                         alert("帳號重覆")
                     } else {
                         // 發送 POST 請求進行註冊
-                        $.post("../api/reg.php", user, (res) => {
+                        $.post("./api/reg.php", user, (res) => {
                             alert("註冊完成，歡迎加入")
                         })
                     }
