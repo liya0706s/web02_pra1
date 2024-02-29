@@ -7,7 +7,7 @@
     <div id="result"></div>
     <div>
         <button onclick="forget()">尋找</button>
-    </div>
+    </div>a
 </fieldset>
 
 <script>
